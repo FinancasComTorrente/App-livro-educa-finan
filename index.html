@@ -37,12 +37,12 @@
 
             --color-bg-primary-dark: #012538;
             --color-text-primary-dark: #FCEFEF;
-            --color-text-headings-dark: #FCEFEF; /* Ou #FB9833 para destaque */
+            --color-text-headings-dark: #FCEFEF; 
             --color-header-bg-dark: #4D555B;
-            --color-card-bg-dark: #4D555B; /* Ou um tom de azul mais escuro, ex: #001f2e */
+            --color-card-bg-dark: #4D555B; 
             --color-footer-bg-dark: #012538; 
             --color-footer-text-dark: #FCEFEF;
-            --color-border-neutral-dark: #1B768E; /* Azul Petróleo como borda */
+            --color-border-neutral-dark: #1B768E; 
             --color-input-bg-dark: #012538; 
             --color-input-text-dark: #FCEFEF;
             --color-input-border-dark: #1B768E;
@@ -51,14 +51,13 @@
             --color-nav-link-text-dark: #FCEFEF;
             --color-nav-link-hover-bg-dark: rgba(251, 152, 51, 0.15);
             --color-nav-link-hover-text-dark: #FB9833;
-            --color-active-nav-bg-dark: #FB9833; /* Laranja como destaque no modo escuro */
-            --color-active-nav-text-dark: #012538; /* Texto escuro sobre laranja */
+            --color-active-nav-bg-dark: #FB9833; 
+            --color-active-nav-text-dark: #012538; 
             --color-chart-label-text-dark: #FCEFEF;
             --color-chart-title-text-dark: #FCEFEF;
             --color-chart-tooltip-bg-dark: #4D555B;
             --color-chart-tooltip-text-dark: #FCEFEF;
 
-            /* Cores da marca (consistentes em ambos os modos) */
             --color-brand-orange: #FB9833;
             --color-brand-teal: #1B768E;
             --color-brand-dark-blue: #012538;
@@ -68,11 +67,10 @@
             --color-warning-text: #C2782C; 
             --color-warning-bg-light: #FFF3E0;
             --color-info-bg-light: #E0F2F7;
-            --color-warning-bg-dark: #79401B; /* Laranja escuro para fundo de aviso no modo escuro */
-            --color-info-bg-dark: #0E3C4A;    /* Azul petróleo escuro para fundo de info no modo escuro */
+            --color-warning-bg-dark: #79401B; 
+            --color-info-bg-dark: #0E3C4A;    
 
 
-            /* Aplicando cores iniciais (modo claro) */
             --color-bg-primary: var(--color-bg-primary-light);
             --color-text-primary: var(--color-text-primary-light);
             --color-text-headings: var(--color-text-headings-light);
@@ -97,7 +95,6 @@
             --color-chart-tooltip-text: var(--color-chart-tooltip-text-light);
             --current-warning-bg: var(--color-warning-bg-light);
             --current-info-bg: var(--color-info-bg-light);
-
         }
 
         html.dark {
@@ -163,7 +160,6 @@
             margin-bottom: 2rem; 
             transition: all 0.3s ease-in-out;
         }
-        /* Efeito hover para cards, independente do tema */
         .section-card:hover {
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
             transform: translateY(-3px);
@@ -220,7 +216,7 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
         .btn-primary:hover {
-            background-color: #E5852D; /* Laranja mais escuro */
+            background-color: #E5852D; 
             transform: translateY(-1px);
         }
         .btn-secondary {
@@ -229,7 +225,7 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
         .btn-secondary:hover {
-            background-color: #145A6C; /* Teal mais escuro */
+            background-color: #145A6C; 
             transform: translateY(-1px);
         }
         .theme-toggle-button {
@@ -238,25 +234,39 @@
         .theme-toggle-button:hover {
             color: var(--color-brand-orange);
         }
-        /* Estilização específica para títulos e textos dentro dos cards */
         .section-card h3, .section-card h4 {
             color: var(--color-text-headings);
         }
         .section-card p, .section-card li, .section-card label, .section-card span {
              color: var(--color-text-primary);
         }
-         /* Ajuste para cards de aviso/info no modo escuro */
         .warning-card-bg { background-color: var(--current-warning-bg); }
         .info-card-bg { background-color: var(--current-info-bg); }
         .warning-card-text { color: var(--color-warning-text); }
-        html.dark .warning-card-text { color: var(--color-brand-light-bg); } /* Texto claro em fundo de aviso escuro */
+        html.dark .warning-card-text { color: var(--color-brand-light-bg); } 
         .info-card-text { color: var(--color-brand-dark-blue); }
-        html.dark .info-card-text { color: var(--color-brand-light-bg); } /* Texto claro em fundo de info escuro */
+        html.dark .info-card-text { color: var(--color-brand-light-bg); } 
 
+        .share-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem; /* p-2 */
+            border-radius: 0.375rem; /* rounded-md */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            color: var(--color-footer-text); /* Cor do ícone igual ao texto do rodapé */
+        }
+        .share-button:hover {
+            background-color: rgba(251, 152, 51, 0.2); /* Laranja com opacidade */
+            transform: scale(1.1);
+        }
+        .share-button i { /* Para garantir que o ícone herde a cor */
+            color: currentColor;
+        }
 
     </style>
 </head>
-<body class="text-base"> <!-- Removido bg e text daqui, pois serão controlados por :root e .dark -->
+<body class="text-base">
 
     <header class="shadow-md sticky top-0 z-50" style="background-color: var(--color-header-bg);">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -323,7 +333,24 @@
                 <a href="#bancos" class="footer-nav-link text-sm font-medium">Bancos</a>
                 <a href="#autor" class="footer-nav-link text-sm font-medium">Sobre o Autor</a>
             </nav>
-            <div class="border-t pt-8 text-center" style="border-color: rgba(252, 239, 239, 0.2);"> <!-- FCEFEF com opacidade -->
+            <div class="mb-8 text-center">
+                <p class="text-sm mb-2" style="color: rgba(252, 239, 239, 0.9);">Compartilhe este guia:</p>
+                <div id="share-buttons-container" class="flex justify-center space-x-3">
+                    <a href="#" id="share-whatsapp" class="share-button" title="Compartilhar no WhatsApp">
+                        <i data-lucide="message-circle" class="h-5 w-5"></i> <!-- Usando message-circle para WhatsApp -->
+                    </a>
+                    <a href="#" id="share-twitter" class="share-button" title="Compartilhar no X (Twitter)">
+                        <i data-lucide="twitter" class="h-5 w-5"></i>
+                    </a>
+                    <a href="#" id="share-facebook" class="share-button" title="Compartilhar no Facebook">
+                        <i data-lucide="facebook" class="h-5 w-5"></i>
+                    </a>
+                    <a href="#" id="share-linkedin" class="share-button" title="Compartilhar no LinkedIn">
+                        <i data-lucide="linkedin" class="h-5 w-5"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t pt-8 text-center" style="border-color: rgba(252, 239, 239, 0.2);">
                 <p>&copy; 2025 Matheus Torrente - Economista e Educador Financeiro.</p>
                 <p class="text-sm mt-2" style="color: rgba(252, 239, 239, 0.8);">Esta é uma aplicação interativa baseada nos conceitos do livro "Educação Financeira: Do zero à liberdade".</p>
             </div>
@@ -344,7 +371,6 @@
             const themeIconMoon = document.getElementById('theme-icon-moon');
             const htmlElement = document.documentElement;
 
-            // Função para aplicar o tema e atualizar o ícone
             function applyTheme(isDark) {
                 if (isDark) {
                     htmlElement.classList.add('dark');
@@ -355,29 +381,24 @@
                     themeIconSun.classList.remove('hidden');
                     themeIconMoon.classList.add('hidden');
                 }
-                // Atualiza cores do gráfico se ele existir
                 if (budgetChart) {
                     updateBudgetChartInstance(budgetChart.data.labels, budgetChart.data.datasets[0].data);
                 }
             }
 
-            // Verifica preferência salva no localStorage
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme) {
                 applyTheme(savedTheme === 'dark');
             } else {
-                // Opcional: Detectar preferência do sistema operacional
                 const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
                 applyTheme(prefersDark); 
             }
 
-            // Event listener para o botão de toggle
             themeToggleButton.addEventListener('click', () => {
                 const isDarkMode = htmlElement.classList.toggle('dark');
                 localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
                 applyTheme(isDarkMode);
             });
-
 
             const appData = {
                 mentalidade: {
@@ -585,6 +606,49 @@
             const mobileMenu = document.getElementById('mobile-menu');
             const heroStartButton = document.getElementById('hero-start-button');
 
+            // --- Lógica de Compartilhamento ---
+            const shareUrl = window.location.origin + window.location.pathname; // URL base do site
+            const shareTitle = document.title;
+            const shareText = `Confira este guia interativo sobre Educação Financeira: ${shareTitle}!`;
+
+            const shareButtons = {
+                whatsapp: document.getElementById('share-whatsapp'),
+                twitter: document.getElementById('share-twitter'),
+                facebook: document.getElementById('share-facebook'),
+                linkedin: document.getElementById('share-linkedin')
+            };
+
+            if (shareButtons.whatsapp) {
+                shareButtons.whatsapp.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`;
+                    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+                });
+            }
+            if (shareButtons.twitter) {
+                shareButtons.twitter.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
+                    window.open(twitterUrl, '_blank', 'noopener,noreferrer');
+                });
+            }
+            if (shareButtons.facebook) {
+                shareButtons.facebook.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+                    window.open(facebookUrl, '_blank', 'noopener,noreferrer');
+                });
+            }
+            if (shareButtons.linkedin) {
+                shareButtons.linkedin.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const linkedInUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(shareTitle)}&summary=${encodeURIComponent(shareText)}`;
+                    window.open(linkedInUrl, '_blank', 'noopener,noreferrer');
+                });
+            }
+            // --- Fim da Lógica de Compartilhamento ---
+
+
             function getSectionNavigationButtons(currentSectionId) {
                 const currentIndex = sectionOrder.indexOf(currentSectionId);
                 let buttonsHTML = '<div class="mt-12 flex justify-between items-center border-t pt-6" style="border-color: var(--color-border-neutral);">';
@@ -659,7 +723,7 @@
                      history.pushState(null, null, `#${sectionIdToShow}`);
                 }
                 const headerElement = document.querySelector('header');
-                if (headerElement) { // Verificação de nulidade
+                if (headerElement) { 
                     const headerHeight = headerElement.offsetHeight;
                     const sectionElement = document.getElementById(sectionIdToShow);
                     if (sectionElement) { 
@@ -714,9 +778,9 @@
                     finalBalanceEl.textContent = formatter.format(finalBalance);
                     finalBalanceEl.classList.remove('text-[#C2782C]', 'text-[var(--color-brand-teal)]'); 
                     if (finalBalance < 0) {
-                        finalBalanceEl.classList.add('text-[#C2782C]'); // Laranja para negativo
+                        finalBalanceEl.classList.add('text-[#C2782C]'); 
                     } else {
-                        finalBalanceEl.classList.add('text-[var(--color-brand-teal)]'); // Azul petróleo para positivo
+                        finalBalanceEl.classList.add('text-[var(--color-brand-teal)]'); 
                     }
                 }
                 updateBudgetChartInstance(expenseLabels, expenseValues);
@@ -791,7 +855,7 @@
                 if (budgetChart) {
                     budgetChart.data.labels = labels;
                     budgetChart.data.datasets[0].data = data;
-                    // As cores dos datasets são fixas da paleta, não precisam mudar com o tema, apenas o fundo do card
+                    budgetChart.data.datasets[0].borderColor = isDarkMode ? getComputedStyle(htmlElement).getPropertyValue('--color-card-bg-dark') : getComputedStyle(htmlElement).getPropertyValue('--color-card-bg-light');
                     budgetChart.options.plugins.legend.labels.color = isDarkMode ? getComputedStyle(htmlElement).getPropertyValue('--color-chart-label-text-dark') : getComputedStyle(htmlElement).getPropertyValue('--color-chart-label-text-light');
                     budgetChart.options.plugins.title.color = isDarkMode ? getComputedStyle(htmlElement).getPropertyValue('--color-chart-title-text-dark') : getComputedStyle(htmlElement).getPropertyValue('--color-chart-title-text-light');
                     budgetChart.options.plugins.tooltip.backgroundColor = isDarkMode ? getComputedStyle(htmlElement).getPropertyValue('--color-chart-tooltip-bg-dark') : getComputedStyle(htmlElement).getPropertyValue('--color-chart-tooltip-bg-light');
@@ -808,7 +872,7 @@
                                 label: 'Despesas',
                                 data: data,
                                 backgroundColor: chartColors.slice(0, data.length).map(color => color.startsWith('var') ? getComputedStyle(htmlElement).getPropertyValue(color.slice(4,-1)) : color),
-                                borderColor: isDarkMode ? getComputedStyle(htmlElement).getPropertyValue('--color-card-bg-dark') : getComputedStyle(htmlElement).getPropertyValue('--color-card-bg-light'), // Borda com a cor do fundo do card
+                                borderColor: isDarkMode ? getComputedStyle(htmlElement).getPropertyValue('--color-card-bg-dark') : getComputedStyle(htmlElement).getPropertyValue('--color-card-bg-light'),
                                 borderWidth: 2,
                             }]
                         },
@@ -883,17 +947,14 @@
                     initialSectionId = hashId;
                 }
             }
-            showSection(initialSectionId); // Mostra a seção inicial (que vai carregar o gráfico se for 'orcamento')
+            showSection(initialSectionId); 
             
-            // Se a seção inicial for 'orcamento', o gráfico já é populado dentro do showSection -> setupEventListenersForSection -> updateBudgetUI
-            // Para garantir que o gráfico respeite o tema inicial, chamamos applyTheme novamente após a lógica de carregamento inicial.
             if (savedTheme) {
                 applyTheme(savedTheme === 'dark');
             } else {
                 const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
                 applyTheme(prefersDark); 
             }
-
 
             window.addEventListener('popstate', () => {
                 let currentHashId = 'mentalidade';
