@@ -7,44 +7,168 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Favicon (Exemplo - substitua pelo seu) -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>">
 
     <style>
+        :root {
+            --color-bg-primary-light: #FCEFEF;
+            --color-text-primary-light: #4D555B;
+            --color-text-headings-light: #012538;
+            --color-header-bg-light: white;
+            --color-card-bg-light: white;
+            --color-footer-bg-light: #012538;
+            --color-footer-text-light: #FCEFEF;
+            --color-border-neutral-light: #D1D5DB; /* Tailwind gray-300 */
+            --color-input-bg-light: white;
+            --color-input-text-light: #4D555B;
+            --color-input-border-light: #D1D5DB;
+            --color-input-focus-border-light: #1B768E;
+            --color-input-focus-shadow-light: rgba(27, 118, 142, 0.3);
+            --color-nav-link-text-light: #4D555B;
+            --color-nav-link-hover-bg-light: rgba(27, 118, 142, 0.1);
+            --color-nav-link-hover-text-light: #1B768E;
+            --color-active-nav-bg-light: #1B768E;
+            --color-active-nav-text-light: white;
+            --color-chart-label-text-light: #4D555B;
+            --color-chart-title-text-light: #012538;
+            --color-chart-tooltip-bg-light: #012538;
+            --color-chart-tooltip-text-light: #FCEFEF;
+
+
+            --color-bg-primary-dark: #012538;
+            --color-text-primary-dark: #FCEFEF;
+            --color-text-headings-dark: #FCEFEF; /* Ou #FB9833 para destaque */
+            --color-header-bg-dark: #4D555B;
+            --color-card-bg-dark: #4D555B; /* Ou um tom de azul mais escuro, ex: #001f2e */
+            --color-footer-bg-dark: #012538; 
+            --color-footer-text-dark: #FCEFEF;
+            --color-border-neutral-dark: #1B768E; /* Azul Petróleo como borda */
+            --color-input-bg-dark: #012538; 
+            --color-input-text-dark: #FCEFEF;
+            --color-input-border-dark: #1B768E;
+            --color-input-focus-border-dark: #FB9833;
+            --color-input-focus-shadow-dark: rgba(251, 152, 51, 0.3);
+            --color-nav-link-text-dark: #FCEFEF;
+            --color-nav-link-hover-bg-dark: rgba(251, 152, 51, 0.15);
+            --color-nav-link-hover-text-dark: #FB9833;
+            --color-active-nav-bg-dark: #FB9833; /* Laranja como destaque no modo escuro */
+            --color-active-nav-text-dark: #012538; /* Texto escuro sobre laranja */
+            --color-chart-label-text-dark: #FCEFEF;
+            --color-chart-title-text-dark: #FCEFEF;
+            --color-chart-tooltip-bg-dark: #4D555B;
+            --color-chart-tooltip-text-dark: #FCEFEF;
+
+            /* Cores da marca (consistentes em ambos os modos) */
+            --color-brand-orange: #FB9833;
+            --color-brand-teal: #1B768E;
+            --color-brand-dark-blue: #012538;
+            --color-brand-dark-gray: #4D555B;
+            --color-brand-light-bg: #FCEFEF;
+            --color-white: white;
+            --color-warning-text: #C2782C; 
+            --color-warning-bg-light: #FFF3E0;
+            --color-info-bg-light: #E0F2F7;
+            --color-warning-bg-dark: #79401B; /* Laranja escuro para fundo de aviso no modo escuro */
+            --color-info-bg-dark: #0E3C4A;    /* Azul petróleo escuro para fundo de info no modo escuro */
+
+
+            /* Aplicando cores iniciais (modo claro) */
+            --color-bg-primary: var(--color-bg-primary-light);
+            --color-text-primary: var(--color-text-primary-light);
+            --color-text-headings: var(--color-text-headings-light);
+            --color-header-bg: var(--color-header-bg-light);
+            --color-card-bg: var(--color-card-bg-light);
+            --color-footer-bg: var(--color-footer-bg-light);
+            --color-footer-text: var(--color-footer-text-light);
+            --color-border-neutral: var(--color-border-neutral-light);
+            --color-input-bg: var(--color-input-bg-light);
+            --color-input-text: var(--color-input-text-light);
+            --color-input-border: var(--color-input-border-light);
+            --color-input-focus-border: var(--color-input-focus-border-light);
+            --color-input-focus-shadow: var(--color-input-focus-shadow-light);
+            --color-nav-link-text: var(--color-nav-link-text-light);
+            --color-nav-link-hover-bg: var(--color-nav-link-hover-bg-light);
+            --color-nav-link-hover-text: var(--color-nav-link-hover-text-light);
+            --color-active-nav-bg: var(--color-active-nav-bg-light);
+            --color-active-nav-text: var(--color-active-nav-text-light);
+            --color-chart-label-text: var(--color-chart-label-text-light);
+            --color-chart-title-text: var(--color-chart-title-text-light);
+            --color-chart-tooltip-bg: var(--color-chart-tooltip-bg-light);
+            --color-chart-tooltip-text: var(--color-chart-tooltip-text-light);
+            --current-warning-bg: var(--color-warning-bg-light);
+            --current-info-bg: var(--color-info-bg-light);
+
+        }
+
+        html.dark {
+            --color-bg-primary: var(--color-bg-primary-dark);
+            --color-text-primary: var(--color-text-primary-dark);
+            --color-text-headings: var(--color-text-headings-dark);
+            --color-header-bg: var(--color-header-bg-dark);
+            --color-card-bg: var(--color-card-bg-dark);
+            --color-footer-bg: var(--color-footer-bg-dark);
+            --color-footer-text: var(--color-footer-text-dark);
+            --color-border-neutral: var(--color-border-neutral-dark);
+            --color-input-bg: var(--color-input-bg-dark);
+            --color-input-text: var(--color-input-text-dark);
+            --color-input-border: var(--color-input-border-dark);
+            --color-input-focus-border: var(--color-input-focus-border-dark);
+            --color-input-focus-shadow: var(--color-input-focus-shadow-dark);
+            --color-nav-link-text: var(--color-nav-link-text-dark);
+            --color-nav-link-hover-bg: var(--color-nav-link-hover-bg-dark);
+            --color-nav-link-hover-text: var(--color-nav-link-hover-text-dark);
+            --color-active-nav-bg: var(--color-active-nav-bg-dark);
+            --color-active-nav-text: var(--color-active-nav-text-dark);
+            --color-chart-label-text: var(--color-chart-label-text-dark);
+            --color-chart-title-text: var(--color-chart-title-text-dark);
+            --color-chart-tooltip-bg: var(--color-chart-tooltip-bg-dark);
+            --color-chart-tooltip-text: var(--color-chart-tooltip-text-dark);
+            --current-warning-bg: var(--color-warning-bg-dark);
+            --current-info-bg: var(--color-info-bg-dark);
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #FCEFEF; /* brand-light-bg */
-            color: #4D555B; /* brand-dark-gray */
+            background-color: var(--color-bg-primary); 
+            color: var(--color-text-primary); 
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
         .nav-link {
+            color: var(--color-nav-link-text);
             transition: background-color 0.3s ease, color 0.3s ease;
         }
         .active-nav {
-            background-color: #1B768E; /* brand-teal */
-            color: white !important;
+            background-color: var(--color-active-nav-bg); 
+            color: var(--color-active-nav-text) !important;
         }
         .nav-link:hover {
-            background-color: rgba(27, 118, 142, 0.1); /* brand-teal com 10% de opacidade */
-            color: #1B768E; /* brand-teal */
+            background-color: var(--color-nav-link-hover-bg); 
+            color: var(--color-nav-link-hover-text); 
         }
         .footer-nav-link {
-            color: #FCEFEF; /* Cor clara para texto no rodapé escuro */
+            color: var(--color-footer-text); 
             transition: color 0.3s ease;
         }
         .footer-nav-link:hover {
-            color: #FB9833; /* Cor laranja ao pairar */
+            color: var(--color-brand-orange); 
         }
 
         .section-card {
-            background-color: white;
-            border-radius: 0.75rem; /* rounded-xl */
+            background-color: var(--color-card-bg);
+            border-radius: 0.75rem; 
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-            padding: 1.5rem; /* p-6 */
-            margin-bottom: 2rem; /* mb-8 */
+            padding: 1.5rem; 
+            margin-bottom: 2rem; 
             transition: all 0.3s ease-in-out;
         }
+        /* Efeito hover para cards, independente do tema */
+        .section-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            transform: translateY(-3px);
+        }
+
         .chart-container {
             position: relative;
             width: 100%;
@@ -52,7 +176,7 @@
             margin-left: auto;
             margin-right: auto;
             height: auto;
-            min-height: 300px; /* Ajustado para Doughnut */
+            min-height: 300px; 
         }
         @media (min-width: 768px) {
             .chart-container {
@@ -68,7 +192,7 @@
             -moz-appearance: textfield;
         }
         .content-section {
-            display: none; /* Esconder seções por padrão */
+            display: none; 
             animation: fadeIn 0.5s ease-in-out;
         }
         .active-section {
@@ -80,80 +204,106 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Estilos para inputs e botões com as cores da paleta */
         input[type="text"], input[type="number"], select {
-            border-color: #D1D5DB; /* gray-300 */
-            color: #4D555B;
+            background-color: var(--color-input-bg);
+            color: var(--color-input-text);
+            border-color: var(--color-input-border);
         }
         input[type="text"]:focus, input[type="number"]:focus, select:focus {
-            border-color: #1B768E; /* brand-teal */
-            box-shadow: 0 0 0 2px rgba(27, 118, 142, 0.3); /* brand-teal com opacidade */
+            border-color: var(--color-input-focus-border); 
+            box-shadow: 0 0 0 2px var(--color-input-focus-shadow); 
             outline: none;
         }
         .btn-primary {
-            background-color: #FB9833; /* brand-orange */
-            color: white;
-            transition: background-color 0.3s ease;
+            background-color: var(--color-brand-orange); 
+            color: var(--color-white);
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
         .btn-primary:hover {
             background-color: #E5852D; /* Laranja mais escuro */
+            transform: translateY(-1px);
         }
         .btn-secondary {
-            background-color: #1B768E; /* brand-teal */
-            color: white;
-            transition: background-color 0.3s ease;
+            background-color: var(--color-brand-teal); 
+            color: var(--color-white);
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
         .btn-secondary:hover {
             background-color: #145A6C; /* Teal mais escuro */
+            transform: translateY(-1px);
         }
+        .theme-toggle-button {
+            color: var(--color-text-primary);
+        }
+        .theme-toggle-button:hover {
+            color: var(--color-brand-orange);
+        }
+        /* Estilização específica para títulos e textos dentro dos cards */
+        .section-card h3, .section-card h4 {
+            color: var(--color-text-headings);
+        }
+        .section-card p, .section-card li, .section-card label, .section-card span {
+             color: var(--color-text-primary);
+        }
+         /* Ajuste para cards de aviso/info no modo escuro */
+        .warning-card-bg { background-color: var(--current-warning-bg); }
+        .info-card-bg { background-color: var(--current-info-bg); }
+        .warning-card-text { color: var(--color-warning-text); }
+        html.dark .warning-card-text { color: var(--color-brand-light-bg); } /* Texto claro em fundo de aviso escuro */
+        .info-card-text { color: var(--color-brand-dark-blue); }
+        html.dark .info-card-text { color: var(--color-brand-light-bg); } /* Texto claro em fundo de info escuro */
+
 
     </style>
 </head>
-<body class="bg-[#FCEFEF] text-[#4D555B]">
+<body class="text-base"> <!-- Removido bg e text daqui, pois serão controlados por :root e .dark -->
 
-    <header class="bg-white shadow-md sticky top-0 z-50">
+    <header class="shadow-md sticky top-0 z-50" style="background-color: var(--color-header-bg);">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
-                    <i data-lucide="book-heart" class="h-8 w-8 text-[#FB9833]"></i> <!-- brand-orange -->
-                    <h1 class="ml-3 text-xl font-bold text-[#012538] hidden sm:block">Educação Financeira</h1> <!-- brand-dark-blue -->
+                    <i data-lucide="book-heart" class="h-8 w-8 text-[var(--color-brand-orange)]"></i> 
+                    <h1 class="ml-3 text-xl font-bold hidden sm:block" style="color: var(--color-text-headings);">Educação Financeira</h1>
                 </div>
-                <nav id="header-nav" class="hidden md:flex space-x-1">
-                    <a href="#mentalidade" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-[#4D555B]">Mentalidade</a>
-                    <a href="#orcamento" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-[#4D555B]">Orçamento</a>
-                    <a href="#dividas" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-[#4D555B]">Dívidas</a>
-                    <a href="#seguranca" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-[#4D555B]">Segurança</a>
-                    <a href="#bancos" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-[#4D555B]">Bancos</a>
-                    <a href="#autor" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-[#4D555B]">Sobre o Autor</a>
-                </nav>
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-[#4D555B] hover:text-[#1B768E] focus:outline-none">
-                        <i data-lucide="menu" class="h-6 w-6"></i>
+                <div class="flex items-center">
+                    <nav id="header-nav" class="hidden md:flex space-x-1 mr-4">
+                        <a href="#mentalidade" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Mentalidade</a>
+                        <a href="#orcamento" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Orçamento</a>
+                        <a href="#dividas" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Dívidas</a>
+                        <a href="#seguranca" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Segurança</a>
+                        <a href="#bancos" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Bancos</a>
+                        <a href="#autor" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Sobre o Autor</a>
+                    </nav>
+                    <button id="theme-toggle" type="button" class="theme-toggle-button p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-orange)]">
+                        <i data-lucide="sun" class="h-6 w-6" id="theme-icon-sun"></i>
+                        <i data-lucide="moon" class="h-6 w-6 hidden" id="theme-icon-moon"></i>
                     </button>
+                    <div class="md:hidden ml-2">
+                        <button id="mobile-menu-button" class="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-orange)]" style="color: var(--color-text-primary);">
+                            <i data-lucide="menu" class="h-6 w-6"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- Mobile menu -->
-        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
-            <a href="#mentalidade" class="block nav-link-mobile px-4 py-3 text-sm text-[#4D555B] hover:bg-[#1B768E]/10 hover:text-[#1B768E]">Mentalidade</a>
-            <a href="#orcamento" class="block nav-link-mobile px-4 py-3 text-sm text-[#4D555B] hover:bg-[#1B768E]/10 hover:text-[#1B768E]">Orçamento</a>
-            <a href="#dividas" class="block nav-link-mobile px-4 py-3 text-sm text-[#4D555B] hover:bg-[#1B768E]/10 hover:text-[#1B768E]">Dívidas</a>
-            <a href="#seguranca" class="block nav-link-mobile px-4 py-3 text-sm text-[#4D555B] hover:bg-[#1B768E]/10 hover:text-[#1B768E]">Segurança</a>
-            <a href="#bancos" class="block nav-link-mobile px-4 py-3 text-sm text-[#4D555B] hover:bg-[#1B768E]/10 hover:text-[#1B768E]">Bancos</a>
-            <a href="#autor" class="block nav-link-mobile px-4 py-3 text-sm text-[#4D555B] hover:bg-[#1B768E]/10 hover:text-[#1B768E]">Sobre o Autor</a>
+        <div id="mobile-menu" class="md:hidden hidden shadow-lg" style="background-color: var(--color-header-bg);">
+            <a href="#mentalidade" class="block nav-link-mobile px-4 py-3 text-sm hover:bg-[var(--color-nav-link-hover-bg)] hover:text-[var(--color-nav-link-hover-text)]" style="color: var(--color-nav-link-text);">Mentalidade</a>
+            <a href="#orcamento" class="block nav-link-mobile px-4 py-3 text-sm hover:bg-[var(--color-nav-link-hover-bg)] hover:text-[var(--color-nav-link-hover-text)]" style="color: var(--color-nav-link-text);">Orçamento</a>
+            <a href="#dividas" class="block nav-link-mobile px-4 py-3 text-sm hover:bg-[var(--color-nav-link-hover-bg)] hover:text-[var(--color-nav-link-hover-text)]" style="color: var(--color-nav-link-text);">Dívidas</a>
+            <a href="#seguranca" class="block nav-link-mobile px-4 py-3 text-sm hover:bg-[var(--color-nav-link-hover-bg)] hover:text-[var(--color-nav-link-hover-text)]" style="color: var(--color-nav-link-text);">Segurança</a>
+            <a href="#bancos" class="block nav-link-mobile px-4 py-3 text-sm hover:bg-[var(--color-nav-link-hover-bg)] hover:text-[var(--color-nav-link-hover-text)]" style="color: var(--color-nav-link-text);">Bancos</a>
+            <a href="#autor" class="block nav-link-mobile px-4 py-3 text-sm hover:bg-[var(--color-nav-link-hover-bg)] hover:text-[var(--color-nav-link-hover-text)]" style="color: var(--color-nav-link-text);">Sobre o Autor</a>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-[calc(100vh-200px)]"> <!-- min-h para empurrar rodapé -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-[calc(100vh-200px)]">
         <section id="hero" class="text-center py-12">
-            <h2 class="text-4xl font-bold tracking-tight text-[#FB9833] sm:text-5xl">Do Zero à Liberdade Financeira</h2> <!-- brand-orange -->
-            <p class="mt-4 max-w-2xl mx-auto text-lg text-[#4D555B]">Transforme sua relação com o dinheiro. Este guia interativo capacita você a organizar suas finanças, eliminar o estresse e construir o futuro que você sonha.</p>
+            <h2 class="text-4xl font-bold tracking-tight sm:text-5xl" style="color: var(--color-brand-orange);">Do Zero à Liberdade Financeira</h2>
+            <p class="mt-4 max-w-2xl mx-auto text-lg" style="color: var(--color-text-primary);">Transforme sua relação com o dinheiro. Este guia interativo capacita você a organizar suas finanças, eliminar o estresse e construir o futuro que você sonha.</p>
             <a href="#mentalidade" id="hero-start-button" class="mt-8 inline-block btn-primary font-bold py-3 px-8 rounded-lg shadow-lg transition-colors">Comece sua Jornada Agora</a>
         </section>
 
         <div id="content-container">
-            <!-- As seções serão populadas pelo JavaScript -->
             <section id="mentalidade" class="content-section"></section>
             <section id="orcamento" class="content-section"></section>
             <section id="dividas" class="content-section"></section>
@@ -163,7 +313,7 @@
         </div>
     </main>
     
-    <footer class="bg-[#012538] text-[#FCEFEF] mt-16 py-12"> <!-- brand-dark-blue bg, brand-light-bg text -->
+    <footer class="mt-16 py-12" style="background-color: var(--color-footer-bg); color: var(--color-footer-text);">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <nav id="footer-nav" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mb-8 text-center sm:text-left">
                 <a href="#mentalidade" class="footer-nav-link text-sm font-medium">Mentalidade</a>
@@ -173,42 +323,80 @@
                 <a href="#bancos" class="footer-nav-link text-sm font-medium">Bancos</a>
                 <a href="#autor" class="footer-nav-link text-sm font-medium">Sobre o Autor</a>
             </nav>
-            <div class="border-t border-[#FCEFEF]/20 pt-8 text-center">
+            <div class="border-t pt-8 text-center" style="border-color: rgba(252, 239, 239, 0.2);"> <!-- FCEFEF com opacidade -->
                 <p>&copy; 2025 Matheus Torrente - Economista e Educador Financeiro.</p>
-                <p class="text-sm text-[#FCEFEF]/80 mt-2">Esta é uma aplicação interativa baseada nos conceitos do livro "Educação Financeira: Do zero à liberdade".</p>
+                <p class="text-sm mt-2" style="color: rgba(252, 239, 239, 0.8);">Esta é uma aplicação interativa baseada nos conceitos do livro "Educação Financeira: Do zero à liberdade".</p>
             </div>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            lucide.createIcons(); // Inicializa ícones Lucide
+            lucide.createIcons(); 
             
             const contentContainer = document.getElementById('content-container');
-            let budgetChart; // Variável para o gráfico de orçamento
+            let budgetChart; 
 
-            // Ordem das seções para navegação Próximo/Anterior
             const sectionOrder = ['mentalidade', 'orcamento', 'dividas', 'seguranca', 'bancos', 'autor'];
+            
+            const themeToggleButton = document.getElementById('theme-toggle');
+            const themeIconSun = document.getElementById('theme-icon-sun');
+            const themeIconMoon = document.getElementById('theme-icon-moon');
+            const htmlElement = document.documentElement;
 
-            // Dados do Aplicativo: Conteúdo de cada seção
+            // Função para aplicar o tema e atualizar o ícone
+            function applyTheme(isDark) {
+                if (isDark) {
+                    htmlElement.classList.add('dark');
+                    themeIconSun.classList.add('hidden');
+                    themeIconMoon.classList.remove('hidden');
+                } else {
+                    htmlElement.classList.remove('dark');
+                    themeIconSun.classList.remove('hidden');
+                    themeIconMoon.classList.add('hidden');
+                }
+                // Atualiza cores do gráfico se ele existir
+                if (budgetChart) {
+                    updateBudgetChartInstance(budgetChart.data.labels, budgetChart.data.datasets[0].data);
+                }
+            }
+
+            // Verifica preferência salva no localStorage
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                applyTheme(savedTheme === 'dark');
+            } else {
+                // Opcional: Detectar preferência do sistema operacional
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                applyTheme(prefersDark); 
+            }
+
+            // Event listener para o botão de toggle
+            themeToggleButton.addEventListener('click', () => {
+                const isDarkMode = htmlElement.classList.toggle('dark');
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                applyTheme(isDarkMode);
+            });
+
+
             const appData = {
                 mentalidade: {
                     title: "🧠 Mentalidade Financeira",
                     subtitle: "A base da sua transformação. Suas crenças e atitudes em relação ao dinheiro definem seu sucesso.",
                     content: `
                         <div class="grid md:grid-cols-2 gap-8 mb-8">
-                            <div class="bg-[#FFF3E0] border-l-4 border-[#FB9833] text-[#C2782C] p-4 rounded-r-lg"> <!-- Laranja para aviso leve -->
-                                <h4 class="font-bold mb-2">Crenças Limitantes Comuns</h4>
-                                <ul class="list-disc list-inside text-sm space-y-1">
+                            <div class="warning-card-bg border-l-4 p-4 rounded-r-lg" style="border-color: var(--color-brand-orange);"> 
+                                <h4 class="font-bold mb-2 warning-card-text">Crenças Limitantes Comuns</h4>
+                                <ul class="list-disc list-inside text-sm space-y-1 warning-card-text">
                                     <li>"Dinheiro é sujo" ou "é a raiz de todo mal".</li>
                                     <li>"Eu nunca vou ser rico(a)."</li>
                                     <li>"Investir é só para quem tem muito dinheiro."</li>
                                     <li>"Falar sobre dinheiro é tabu."</li>
                                 </ul>
                             </div>
-                            <div class="bg-[#E0F2F7] border-l-4 border-[#1B768E] text-[#012538] p-4 rounded-r-lg"> <!-- Teal para positivo/informativo -->
-                                <h4 class="font-bold mb-2">Crenças Fortalecedoras para Cultivar</h4>
-                                <ul class="list-disc list-inside text-sm space-y-1">
+                            <div class="info-card-bg border-l-4 p-4 rounded-r-lg" style="border-color: var(--color-brand-teal);"> 
+                                <h4 class="font-bold mb-2 info-card-text">Crenças Fortalecedoras para Cultivar</h4>
+                                <ul class="list-disc list-inside text-sm space-y-1 info-card-text">
                                     <li>"O dinheiro é uma ferramenta neutra para o bem."</li>
                                     <li>"Eu sou capaz de aprender e gerenciar meu dinheiro."</li>
                                     <li>"A prosperidade é possível para mim."</li>
@@ -217,8 +405,8 @@
                             </div>
                         </div>
                         <div class="section-card">
-                            <h3 class="text-2xl font-bold text-[#012538] mb-4">Defina Seu Objetivo SMART</h3>
-                            <p class="mb-4 text-[#4D555B]">Transforme sonhos vagos em metas claras e alcançáveis. Um objetivo SMART é Específico, Mensurável, Atingível, Relevante e Temporal.</p>
+                            <h3 class="text-2xl font-bold mb-4">Defina Seu Objetivo SMART</h3>
+                            <p class="mb-4">Transforme sonhos vagos em metas claras e alcançáveis. Um objetivo SMART é Específico, Mensurável, Atingível, Relevante e Temporal.</p>
                             <form id="smart-goal-form" class="space-y-4">
                                 <div><label class="font-medium">S (Específico): O que você quer?</label><input type="text" id="goal-s" class="w-full p-2 border rounded-md mt-1" placeholder="Ex: Quitar meu cartão de crédito"></div>
                                 <div><label class="font-medium">M (Mensurável): Qual o valor?</label><input type="number" id="goal-m" class="w-full p-2 border rounded-md mt-1" placeholder="Ex: 1500"></div>
@@ -227,7 +415,7 @@
                                 <div><label class="font-medium">T (Temporal): Em quantos meses?</label><input type="number" id="goal-t" class="w-full p-2 border rounded-md mt-1" placeholder="Ex: 5"></div>
                                 <button type="submit" class="btn-primary font-bold py-2 px-6 rounded-lg">Formular Objetivo</button>
                             </form>
-                            <div id="smart-goal-result" class="mt-6 p-4 bg-[#FCEFEF] rounded-md hidden"></div>
+                            <div id="smart-goal-result" class="mt-6 p-4 rounded-md hidden" style="background-color: var(--color-bg-primary);"></div>
                         </div>
                     `
                 },
@@ -235,17 +423,17 @@
                     title: "📊 Orçamento e Ferramentas",
                     subtitle: "O raio-x das suas finanças. Entenda para onde seu dinheiro vai e tome as rédeas do controle.",
                     content: `
-                        <p class="mb-6 text-[#4D555B]">O orçamento é seu mapa financeiro. Não é uma prisão, mas a ferramenta que te dá poder e clareza. Use-o para garantir que suas receitas cubram suas despesas e, mais importante, para direcionar recursos aos seus sonhos.</p>
+                        <p class="mb-6">O orçamento é seu mapa financeiro. Não é uma prisão, mas a ferramenta que te dá poder e clareza. Use-o para garantir que suas receitas cubram suas despesas e, mais importante, para direcionar recursos aos seus sonhos.</p>
                         <div class="section-card">
-                            <h3 class="text-2xl font-bold text-[#012538] mb-4">Simulador de Orçamento Mensal</h3>
-                            <p class="mb-6 text-[#4D555B]">Preencha os campos abaixo para visualizar a distribuição dos seus gastos e o saldo final. Este exercício é baseado no caso da 'Família Bezerra' do livro.</p>
+                            <h3 class="text-2xl font-bold mb-4">Simulador de Orçamento Mensal</h3>
+                            <p class="mb-6">Preencha os campos abaixo para visualizar a distribuição dos seus gastos e o saldo final. Este exercício é baseado no caso da 'Família Bezerra' do livro.</p>
                             <div class="grid md:grid-cols-2 gap-8 items-start">
                                 <form id="budget-form" class="space-y-4">
                                     <div>
-                                        <label class="font-medium text-lg text-[#012538]">Receita Mensal Total</label>
+                                        <label class="font-medium text-lg">Receita Mensal Total</label>
                                         <input type="number" id="budget-income" class="w-full p-2 border rounded-md mt-1 text-lg" placeholder="Ex: 5500" value="5500">
                                     </div>
-                                    <h4 class="font-semibold text-lg pt-4 text-[#012538]">Despesas Principais</h4>
+                                    <h4 class="font-semibold text-lg pt-4">Despesas Principais</h4>
                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div><label class="text-sm">Moradia</label><input type="number" class="budget-expense w-full p-2 border rounded-md mt-1" value="1930" data-label="Moradia"></div>
                                         <div><label class="text-sm">Alimentação</label><input type="number" class="budget-expense w-full p-2 border rounded-md mt-1" value="1700" data-label="Alimentação"></div>
@@ -256,7 +444,7 @@
                                         <div><label class="text-sm">Lazer/Outros</label><input type="number" class="budget-expense w-full p-2 border rounded-md mt-1" value="450" data-label="Lazer/Outros"></div>
                                     </div>
                                     <div id="budget-summary" class="pt-4 space-y-2">
-                                        <div class="flex justify-between font-medium"><span>Total de Despesas:</span><span id="total-expenses" class="text-[#012538]"></span></div>
+                                        <div class="flex justify-between font-medium"><span>Total de Despesas:</span><span id="total-expenses"></span></div>
                                         <div class="flex justify-between font-bold text-xl" id="balance-container"><span>Saldo Final:</span><span id="final-balance"></span></div>
                                     </div>
                                 </form>
@@ -271,25 +459,25 @@
                     title: "🚨 Dívidas: Sinal de Alerta",
                     subtitle: "Entenda os perigos, as consequências e, o mais importante, as estratégias para evitar que as dívidas controlem sua vida.",
                     content: `
-                        <p class="mb-6 text-[#4D555B]">Dívidas problemáticas são como uma bola de neve. Começam pequenas e podem soterrar sua tranquilidade. Prevenir é sempre o melhor remédio.</p>
+                        <p class="mb-6">Dívidas problemáticas são como uma bola de neve. Começam pequenas e podem soterrar sua tranquilidade. Prevenir é sempre o melhor remédio.</p>
                         <div class="section-card">
-                            <h3 class="text-2xl font-bold text-[#012538] mb-4">Sinais de Alerta do Endividamento</h3>
+                            <h3 class="text-2xl font-bold mb-4">Sinais de Alerta do Endividamento</h3>
                             <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-                                <div class="bg-[#FFF3E0] p-4 rounded-lg text-center"><i data-lucide="siren" class="mx-auto h-8 w-8 text-[#FB9833]"></i><p class="mt-2 text-sm text-[#C2782C]">Usa cheque especial com frequência?</p></div>
-                                <div class="bg-[#FFF3E0] p-4 rounded-lg text-center"><i data-lucide="credit-card" class="mx-auto h-8 w-8 text-[#FB9833]"></i><p class="mt-2 text-sm text-[#C2782C]">Paga só o mínimo do cartão de crédito?</p></div>
-                                <div class="bg-[#FFF3E0] p-4 rounded-lg text-center"><i data-lucide="pie-chart" class="mx-auto h-8 w-8 text-[#FB9833]"></i><p class="mt-2 text-sm text-[#C2782C]">Dívidas consomem mais de 30% da sua renda?</p></div>
-                                <div class="bg-[#FFF3E0] p-4 rounded-lg text-center"><i data-lucide="message-square-x" class="mx-auto h-8 w-8 text-[#FB9833]"></i><p class="mt-2 text-sm text-[#C2782C]">Evita olhar extratos e faturas?</p></div>
-                                <div class="bg-[#FFF3E0] p-4 rounded-lg text-center"><i data-lucide="bed-double" class="mx-auto h-8 w-8 text-[#FB9833]"></i><p class="mt-2 text-sm text-[#C2782C]">Perde o sono pensando em contas?</p></div>
-                                <div class="bg-[#FFF3E0] p-4 rounded-lg text-center"><i data-lucide="phone-incoming" class="mx-auto h-8 w-8 text-[#FB9833]"></i><p class="mt-2 text-sm text-[#C2782C]">Recebe ligações de cobrança?</p></div>
+                                <div class="warning-card-bg p-4 rounded-lg text-center"><i data-lucide="siren" class="mx-auto h-8 w-8 text-[var(--color-brand-orange)]"></i><p class="mt-2 text-sm warning-card-text">Usa cheque especial com frequência?</p></div>
+                                <div class="warning-card-bg p-4 rounded-lg text-center"><i data-lucide="credit-card" class="mx-auto h-8 w-8 text-[var(--color-brand-orange)]"></i><p class="mt-2 text-sm warning-card-text">Paga só o mínimo do cartão de crédito?</p></div>
+                                <div class="warning-card-bg p-4 rounded-lg text-center"><i data-lucide="pie-chart" class="mx-auto h-8 w-8 text-[var(--color-brand-orange)]"></i><p class="mt-2 text-sm warning-card-text">Dívidas consomem mais de 30% da sua renda?</p></div>
+                                <div class="warning-card-bg p-4 rounded-lg text-center"><i data-lucide="message-square-x" class="mx-auto h-8 w-8 text-[var(--color-brand-orange)]"></i><p class="mt-2 text-sm warning-card-text">Evita olhar extratos e faturas?</p></div>
+                                <div class="warning-card-bg p-4 rounded-lg text-center"><i data-lucide="bed-double" class="mx-auto h-8 w-8 text-[var(--color-brand-orange)]"></i><p class="mt-2 text-sm warning-card-text">Perde o sono pensando em contas?</p></div>
+                                <div class="warning-card-bg p-4 rounded-lg text-center"><i data-lucide="phone-incoming" class="mx-auto h-8 w-8 text-[var(--color-brand-orange)]"></i><p class="mt-2 text-sm warning-card-text">Recebe ligações de cobrança?</p></div>
                             </div>
                         </div>
                          <div class="section-card">
-                            <h3 class="text-2xl font-bold text-[#012538] mb-4">Estratégias Chave para Evitar Dívidas</h3>
-                             <ul class="space-y-3 text-[#4D555B]">
-                                <li class="flex items-start"><i data-lucide="arrow-down-right" class="h-5 w-5 text-[#1B768E] mt-1 mr-3 shrink-0"></i><div><span class="font-semibold text-[#012538]">Viva um Degrau Abaixo:</span> Gaste consistentemente menos do que ganha. É o princípio de ouro.</div></li>
-                                <li class="flex items-start"><i data-lucide="shield-check" class="h-5 w-5 text-[#1B768E] mt-1 mr-3 shrink-0"></i><div><span class="font-semibold text-[#012538]">Priorize a Reserva de Emergência:</span> Ela é seu escudo contra imprevistos que geram dívidas.</div></li>
-                                <li class="flex items-start"><i data-lucide="shopping-basket" class="h-5 w-5 text-[#1B768E] mt-1 mr-3 shrink-0"></i><div><span class="font-semibold text-[#012538]">Diferencie Necessidades de Desejos:</span> Antes de comprar, pergunte-se: "Eu realmente preciso disso agora?".</div></li>
-                                <li class="flex items-start"><i data-lucide="hand-metal" class="h-5 w-5 text-[#1B768E] mt-1 mr-3 shrink-0"></i><div><span class="font-semibold text-[#012538]">Aprenda a Dizer "NÃO":</span> Para si mesmo, para pressões sociais e para ofertas de crédito que você não pode pagar.</div></li>
+                            <h3 class="text-2xl font-bold mb-4">Estratégias Chave para Evitar Dívidas</h3>
+                             <ul class="space-y-3">
+                                <li class="flex items-start"><i data-lucide="arrow-down-right" class="h-5 w-5 text-[var(--color-brand-teal)] mt-1 mr-3 shrink-0"></i><div><span class="font-semibold" style="color:var(--color-text-headings)">Viva um Degrau Abaixo:</span> Gaste consistentemente menos do que ganha. É o princípio de ouro.</div></li>
+                                <li class="flex items-start"><i data-lucide="shield-check" class="h-5 w-5 text-[var(--color-brand-teal)] mt-1 mr-3 shrink-0"></i><div><span class="font-semibold" style="color:var(--color-text-headings)">Priorize a Reserva de Emergência:</span> Ela é seu escudo contra imprevistos que geram dívidas.</div></li>
+                                <li class="flex items-start"><i data-lucide="shopping-basket" class="h-5 w-5 text-[var(--color-brand-teal)] mt-1 mr-3 shrink-0"></i><div><span class="font-semibold" style="color:var(--color-text-headings)">Diferencie Necessidades de Desejos:</span> Antes de comprar, pergunte-se: "Eu realmente preciso disso agora?".</div></li>
+                                <li class="flex items-start"><i data-lucide="hand-metal" class="h-5 w-5 text-[var(--color-brand-teal)] mt-1 mr-3 shrink-0"></i><div><span class="font-semibold" style="color:var(--color-text-headings)">Aprenda a Dizer "NÃO":</span> Para si mesmo, para pressões sociais e para ofertas de crédito que você não pode pagar.</div></li>
                             </ul>
                         </div>
                     `
@@ -298,33 +486,33 @@
                     title: "🛡️ Segurança: A Reserva de Emergência",
                     subtitle: "O estepe da sua vida financeira. Construa seu colchão de segurança para enfrentar imprevistos com tranquilidade.",
                     content: `
-                        <p class="mb-6 text-[#4D555B]">A Reserva de Emergência é um valor guardado para cobrir gastos urgentes e inesperados, como a perda de um emprego ou um problema de saúde. Ela te protege de recorrer a empréstimos caros em momentos de crise.</p>
+                        <p class="mb-6">A Reserva de Emergência é um valor guardado para cobrir gastos urgentes e inesperados, como a perda de um emprego ou um problema de saúde. Ela te protege de recorrer a empréstimos caros em momentos de crise.</p>
                         <div class="section-card">
-                            <h3 class="text-2xl font-bold text-[#012538] mb-4">Calculadora da Reserva de Emergência</h3>
-                            <p class="mb-4 text-[#4D555B]">Insira seu custo de vida mensal essencial (moradia, alimentação, saúde, etc.) para descobrir o valor ideal da sua reserva.</p>
+                            <h3 class="text-2xl font-bold mb-4">Calculadora da Reserva de Emergência</h3>
+                            <p class="mb-4">Insira seu custo de vida mensal essencial (moradia, alimentação, saúde, etc.) para descobrir o valor ideal da sua reserva.</p>
                             <div class="flex flex-col sm:flex-row items-center gap-4 mb-6">
-                                <label for="monthly-expenses" class="font-medium text-[#012538]">Meu custo de vida mensal essencial é de R$</label>
+                                <label for="monthly-expenses" class="font-medium">Meu custo de vida mensal essencial é de R$</label>
                                 <input type="number" id="monthly-expenses" class="p-2 border rounded-md w-full sm:w-48" placeholder="Ex: 3000">
                                 <button id="calculate-reserve-btn" class="btn-primary font-bold py-2 px-6 rounded-lg w-full sm:w-auto">Calcular</button>
                             </div>
                             <div id="reserve-results" class="grid sm:grid-cols-3 gap-4 text-center hidden">
-                                <div class="bg-[#FCEFEF] p-4 rounded-lg">
-                                    <h4 class="font-bold text-[#012538]">Segurança Mínima</h4>
-                                    <p class="text-2xl font-bold text-[#1B768E] mt-2" id="reserve-3m"></p>
-                                    <p class="text-sm text-[#4D555B]">(3 meses)</p>
+                                <div class="p-4 rounded-lg" style="background-color: var(--color-bg-primary);">
+                                    <h4 class="font-bold">Segurança Mínima</h4>
+                                    <p class="text-2xl font-bold text-[var(--color-brand-teal)] mt-2" id="reserve-3m"></p>
+                                    <p class="text-sm">(3 meses)</p>
                                 </div>
-                                <div class="bg-[#E0F2F7] p-6 rounded-lg border-2 border-[#1B768E]">
-                                    <h4 class="font-bold text-[#012538]">Segurança Ideal</h4>
-                                    <p class="text-3xl font-bold text-[#1B768E] mt-2" id="reserve-6m"></p>
-                                    <p class="text-sm text-[#1B768E]">(6 meses)</p>
+                                <div class="p-6 rounded-lg border-2 info-card-bg" style="border-color: var(--color-brand-teal);">
+                                    <h4 class="font-bold">Segurança Ideal</h4>
+                                    <p class="text-3xl font-bold text-[var(--color-brand-teal)] mt-2" id="reserve-6m"></p>
+                                    <p class="text-sm text-[var(--color-brand-teal)]">(6 meses)</p>
                                 </div>
-                                <div class="bg-[#FCEFEF] p-4 rounded-lg">
-                                    <h4 class="font-bold text-[#012538]">Segurança Máxima</h4>
-                                    <p class="text-2xl font-bold text-[#1B768E] mt-2" id="reserve-12m"></p>
-                                    <p class="text-sm text-[#4D555B]">(12 meses)</p>
+                                <div class="p-4 rounded-lg" style="background-color: var(--color-bg-primary);">
+                                    <h4 class="font-bold">Segurança Máxima</h4>
+                                    <p class="text-2xl font-bold text-[var(--color-brand-teal)] mt-2" id="reserve-12m"></p>
+                                    <p class="text-sm">(12 meses)</p>
                                 </div>
                             </div>
-                            <p class="mt-8 text-[#4D555B] font-medium">Onde guardar a reserva? Priorize <span class="text-[#1B768E] font-semibold">segurança</span> e <span class="text-[#1B768E] font-semibold">liquidez</span>. Boas opções: Tesouro Selic, CDBs com liquidez diária (100% do CDI) ou contas digitais remuneradas.</p>
+                            <p class="mt-8 font-medium">Onde guardar a reserva? Priorize <span class="font-semibold" style="color:var(--color-brand-teal)">segurança</span> e <span class="font-semibold" style="color:var(--color-brand-teal)">liquidez</span>. Boas opções: Tesouro Selic, CDBs com liquidez diária (100% do CDI) ou contas digitais remuneradas.</p>
                         </div>
                     `
                 },
@@ -332,33 +520,33 @@
                     title: "🏛️ Bancos e Crédito Consciente",
                     subtitle: "Navegue no mundo bancário com segurança. Use os serviços a seu favor e evite as armadilhas do crédito.",
                     content: `
-                        <p class="mb-6 text-[#4D555B]">Um consumidor bem informado toma decisões melhores. Conhecer os produtos básicos, as taxas e os perigos do crédito é fundamental para não deixar seu dinheiro na mão dos bancos.</p>
+                        <p class="mb-6">Um consumidor bem informado toma decisões melhores. Conhecer os produtos básicos, as taxas e os perigos do crédito é fundamental para não deixar seu dinheiro na mão dos bancos.</p>
                         <div class="section-card">
-                            <h3 class="text-2xl font-bold text-[#012538] mb-4">Cartão de Crédito: Aliado ou Vilão?</h3>
+                            <h3 class="text-2xl font-bold mb-4">Cartão de Crédito: Aliado ou Vilão?</h3>
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
-                                    <h4 class="font-semibold text-lg text-[#012538] mb-2">Uso Inteligente (Aliado)</h4>
-                                    <ul class="space-y-2 text-sm text-[#4D555B]">
-                                        <li class="flex items-start"><i data-lucide="check-circle-2" class="h-5 w-5 text-[#1B768E] mr-2 mt-0.5 shrink-0"></i><span>Usar como meio de pagamento, não extensão de renda.</span></li>
-                                        <li class="flex items-start"><i data-lucide="check-circle-2" class="h-5 w-5 text-[#1B768E] mr-2 mt-0.5 shrink-0"></i><span>Pagar SEMPRE o valor total da fatura em dia.</span></li>
-                                        <li class="flex items-start"><i data-lucide="check-circle-2" class="h-5 w-5 text-[#1B768E] mr-2 mt-0.5 shrink-0"></i><span>Aproveitar parcelamentos sem juros de forma planejada.</span></li>
-                                        <li class="flex items-start"><i data-lucide="check-circle-2" class="h-5 w-5 text-[#1B768E] mr-2 mt-0.5 shrink-0"></i><span>Concentrar gastos para acumular pontos/milhas (se valer a pena).</span></li>
+                                    <h4 class="font-semibold text-lg mb-2">Uso Inteligente (Aliado)</h4>
+                                    <ul class="space-y-2 text-sm">
+                                        <li class="flex items-start"><i data-lucide="check-circle-2" class="h-5 w-5 text-[var(--color-brand-teal)] mr-2 mt-0.5 shrink-0"></i><span>Usar como meio de pagamento, não extensão de renda.</span></li>
+                                        <li class="flex items-start"><i data-lucide="check-circle-2" class="h-5 w-5 text-[var(--color-brand-teal)] mr-2 mt-0.5 shrink-0"></i><span>Pagar SEMPRE o valor total da fatura em dia.</span></li>
+                                        <li class="flex items-start"><i data-lucide="check-circle-2" class="h-5 w-5 text-[var(--color-brand-teal)] mr-2 mt-0.5 shrink-0"></i><span>Aproveitar parcelamentos sem juros de forma planejada.</span></li>
+                                        <li class="flex items-start"><i data-lucide="check-circle-2" class="h-5 w-5 text-[var(--color-brand-teal)] mr-2 mt-0.5 shrink-0"></i><span>Concentrar gastos para acumular pontos/milhas (se valer a pena).</span></li>
                                     </ul>
                                 </div>
-                                <div class="border-t-2 md:border-t-0 md:border-l-2 pt-6 md:pt-0 md:pl-6 border-dashed border-gray-300">
-                                     <h4 class="font-semibold text-lg text-[#C2782C] mb-2">Uso Perigoso (Vilão)</h4> <!-- Laranja para aviso -->
-                                     <ul class="space-y-2 text-sm text-[#4D555B]">
-                                        <li class="flex items-start"><i data-lucide="x-circle" class="h-5 w-5 text-[#FB9833] mr-2 mt-0.5 shrink-0"></i><span>Gastar mais do que poderia pagar à vista.</span></li>
-                                        <li class="flex items-start"><i data-lucide="x-circle" class="h-5 w-5 text-[#FB9833] mr-2 mt-0.5 shrink-0"></i><span>Pagar o mínimo ou parcelar a fatura (juros altíssimos).</span></li>
-                                        <li class="flex items-start"><i data-lucide="x-circle" class="h-5 w-5 text-[#FB9833] mr-2 mt-0.5 shrink-0"></i><span>Fazer compras por impulso apenas pela facilidade.</span></li>
-                                        <li class="flex items-start"><i data-lucide="x-circle" class="h-5 w-5 text-[#FB9833] mr-2 mt-0.5 shrink-0"></i><span>Ter vários cartões e perder o controle dos limites e faturas.</span></li>
+                                <div class="border-t-2 md:border-t-0 md:border-l-2 pt-6 md:pt-0 md:pl-6 border-dashed" style="border-color: var(--color-border-neutral);">
+                                     <h4 class="font-semibold text-lg mb-2" style="color: var(--color-warning-text);">Uso Perigoso (Vilão)</h4>
+                                     <ul class="space-y-2 text-sm">
+                                        <li class="flex items-start"><i data-lucide="x-circle" class="h-5 w-5 text-[var(--color-brand-orange)] mr-2 mt-0.5 shrink-0"></i><span>Gastar mais do que poderia pagar à vista.</span></li>
+                                        <li class="flex items-start"><i data-lucide="x-circle" class="h-5 w-5 text-[var(--color-brand-orange)] mr-2 mt-0.5 shrink-0"></i><span>Pagar o mínimo ou parcelar a fatura (juros altíssimos).</span></li>
+                                        <li class="flex items-start"><i data-lucide="x-circle" class="h-5 w-5 text-[var(--color-brand-orange)] mr-2 mt-0.5 shrink-0"></i><span>Fazer compras por impulso apenas pela facilidade.</span></li>
+                                        <li class="flex items-start"><i data-lucide="x-circle" class="h-5 w-5 text-[var(--color-brand-orange)] mr-2 mt-0.5 shrink-0"></i><span>Ter vários cartões e perder o controle dos limites e faturas.</span></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="section-card bg-[#FFF3E0] border border-[#FB9833]"> <!-- Laranja para aviso forte -->
-                             <h3 class="text-2xl font-bold text-[#C2782C] mb-4 flex items-center"><i data-lucide="alert-triangle" class="h-7 w-7 mr-3 text-[#FB9833]"></i>Alerta Máximo: Cheque Especial</h3>
-                             <p class="text-[#C2782C]">NÃO é parte da sua renda. É uma das linhas de crédito mais caras do mercado, com juros exorbitantes. Usar o cheque especial para cobrir despesas do dia a dia é um sinal grave de que seu orçamento precisa de ajustes urgentes. Evite a todo custo!</p>
+                        <div class="section-card warning-card-bg border" style="border-color: var(--color-brand-orange);">
+                             <h3 class="text-2xl font-bold mb-4 flex items-center warning-card-text"><i data-lucide="alert-triangle" class="h-7 w-7 mr-3 text-[var(--color-brand-orange)]"></i>Alerta Máximo: Cheque Especial</h3>
+                             <p class="warning-card-text">NÃO é parte da sua renda. É uma das linhas de crédito mais caras do mercado, com juros exorbitantes. Usar o cheque especial para cobrir despesas do dia a dia é um sinal grave de que seu orçamento precisa de ajustes urgentes. Evite a todo custo!</p>
                         </div>
                     `
                 },
@@ -372,14 +560,14 @@
                                     <img src="215__MG_9213.jpg" alt="Foto de Matheus Torrente" class="rounded-lg shadow-lg w-full max-w-xs mx-auto md:mx-0 aspect-[3/4] object-cover" onerror="this.onerror=null;this.src='https://placehold.co/300x400/FCEFEF/012538?text=Matheus+Torrente';">
                                 </div>
                                 <div class="md:w-2/3">
-                                    <h3 class="text-2xl font-bold text-[#012538] mb-3">Matheus Torrente</h3>
-                                    <p class="text-[#4D555B] mb-4 text-justify">
+                                    <h3 class="text-2xl font-bold mb-3">Matheus Torrente</h3>
+                                    <p class="mb-4 text-justify">
                                         Matheus Torrente é um economista apaixonado por finanças pessoais e educação financeira. Com o objetivo de descomplicar o mundo do dinheiro, Matheus dedica-se a criar conteúdo acessível e prático que capacita as pessoas a tomarem melhores decisões financeiras, alcançarem seus objetivos e construírem um futuro mais seguro e próspero.
                                     </p>
-                                    <p class="text-[#4D555B] mb-4 text-justify">
+                                    <p class="mb-4 text-justify">
                                         Através de seu livro "Educação Financeira: Do zero à liberdade" e outras iniciativas, ele busca transformar a relação dos brasileiros com suas finanças, promovendo uma maior consciência sobre a importância do planejamento financeiro, investimentos inteligentes e o desenvolvimento de uma mentalidade próspera.
                                     </p>
-                                    <p class="text-[#4D555B] text-justify">
+                                    <p class="text-justify">
                                         Sua abordagem didática e empática torna os conceitos financeiros compreensíveis para todos, independentemente do nível de conhecimento prévio.
                                     </p>
                                 </div>
@@ -397,40 +585,36 @@
             const mobileMenu = document.getElementById('mobile-menu');
             const heroStartButton = document.getElementById('hero-start-button');
 
-            // Função para gerar os botões de navegação Próximo/Anterior
             function getSectionNavigationButtons(currentSectionId) {
                 const currentIndex = sectionOrder.indexOf(currentSectionId);
-                let buttonsHTML = '<div class="mt-12 flex justify-between items-center border-t pt-6">';
+                let buttonsHTML = '<div class="mt-12 flex justify-between items-center border-t pt-6" style="border-color: var(--color-border-neutral);">';
                 
                 if (currentIndex > 0) {
                     const prevSectionId = sectionOrder[currentIndex - 1];
                     buttonsHTML += `<button data-navtarget="${prevSectionId}" class="section-nav-btn btn-secondary text-sm py-2 px-4 rounded-lg flex items-center"><i data-lucide="arrow-left" class="h-4 w-4 mr-2"></i> Anterior</button>`;
                 } else {
-                    buttonsHTML += '<div></div>'; // Placeholder para manter o justify-between
+                    buttonsHTML += '<div></div>'; 
                 }
 
                 if (currentIndex < sectionOrder.length - 1) {
                     const nextSectionId = sectionOrder[currentIndex + 1];
                     buttonsHTML += `<button data-navtarget="${nextSectionId}" class="section-nav-btn btn-primary text-sm py-2 px-4 rounded-lg flex items-center">Próxima <i data-lucide="arrow-right" class="h-4 w-4 ml-2"></i></button>`;
                 } else {
-                     buttonsHTML += '<div></div>'; // Placeholder
+                     buttonsHTML += '<div></div>'; 
                 }
                 buttonsHTML += '</div>';
                 return buttonsHTML;
             }
 
-
-            // Função para renderizar o conteúdo de uma seção
             function renderContent(sectionId) {
                 const sectionElement = document.getElementById(sectionId);
                 const data = appData[sectionId];
                 if (sectionElement && data) {
                     let fullContent = `
-                        <h2 class="text-3xl font-bold text-[#012538] mb-2">${data.title}</h2>
-                        <p class="text-lg text-[#4D555B] mb-8">${data.subtitle}</p>
-                        ${data.content}
+                        <h2 class="text-3xl font-bold mb-2" style="color: var(--color-text-headings);">${data.title}</h2>
+                        <p class="text-lg mb-8" style="color: var(--color-text-primary);">${data.subtitle}</p>
+                        ${data.content} 
                     `;
-                    // Adicionar botões de navegação Próximo/Anterior
                     fullContent += getSectionNavigationButtons(sectionId);
                     sectionElement.innerHTML = fullContent;
                     lucide.createIcons(); 
@@ -439,7 +623,6 @@
                 }
             }
 
-            // Função para mostrar uma seção específica e esconder as outras
             function showSection(sectionIdToShow) {
                 let sectionExists = false;
                 allContentSections.forEach(section => {
@@ -447,7 +630,7 @@
                         sectionExists = true;
                         if (!section.dataset.rendered) {
                             renderContent(sectionIdToShow);
-                            setupEventListenersForSection(sectionIdToShow); // Configura listeners para a seção recém-renderizada
+                            setupEventListenersForSection(sectionIdToShow); 
                             section.dataset.rendered = 'true';
                         }
                         section.style.display = 'block';
@@ -464,35 +647,31 @@
                     return;
                 }
 
-                // Atualizar link ativo na navegação do cabeçalho
                 headerNavLinks.forEach(link => {
                     link.classList.toggle('active-nav', link.getAttribute('href') === `#${sectionIdToShow}`);
                 });
-                 // Atualizar link ativo na navegação do rodapé (sem a classe 'active-nav' visual, apenas para referência se necessário no futuro)
-                footerNavLinks.forEach(link => {
-                     // Adicionar lógica de destaque se desejado para o rodapé
-                });
-                // Atualizar link ativo na navegação mobile
                 mobileNavLinks.forEach(link => {
                     link.classList.toggle('active-nav', link.getAttribute('href') === `#${sectionIdToShow}`);
-                    link.classList.toggle('bg-[#1B768E]/20', link.getAttribute('href') === `#${sectionIdToShow}`);
+                    link.classList.toggle('bg-[var(--color-nav-link-hover-bg)]', link.getAttribute('href') === `#${sectionIdToShow}`);
                 });
                 
                 if (window.location.hash !== `#${sectionIdToShow}`) {
                      history.pushState(null, null, `#${sectionIdToShow}`);
                 }
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const sectionElement = document.getElementById(sectionIdToShow);
-                if (sectionElement) { 
-                    const sectionTop = sectionElement.offsetTop;
-                    window.scrollTo({
-                        top: sectionTop - headerHeight - 20, 
-                        behavior: 'smooth'
-                    });
+                const headerElement = document.querySelector('header');
+                if (headerElement) { // Verificação de nulidade
+                    const headerHeight = headerElement.offsetHeight;
+                    const sectionElement = document.getElementById(sectionIdToShow);
+                    if (sectionElement) { 
+                        const sectionTop = sectionElement.offsetTop;
+                        window.scrollTo({
+                            top: sectionTop - headerHeight - 20, 
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             }
 
-            // Manipuladores de eventos (para evitar duplicação)
             function handleSmartGoalSubmit(e) {
                 e.preventDefault();
                 const s = document.getElementById('goal-s').value || '[Específico]';
@@ -501,7 +680,7 @@
                 const r = document.getElementById('goal-r').value || '[Relevante]';
                 const t = document.getElementById('goal-t').value || '[Temporal]';
                 const resultDiv = document.getElementById('smart-goal-result');
-                resultDiv.innerHTML = `<p class="font-semibold text-[#012538]">Seu Objetivo SMART:</p><p class="text-[#4D555B]">"${s} no valor de R$ ${m}, poupando R$ ${a} por mês. Farei isso para ${r}, alcançando minha meta em ${t} meses."</p>`;
+                resultDiv.innerHTML = `<p class="font-semibold" style="color: var(--color-text-headings);">Seu Objetivo SMART:</p><p style="color: var(--color-text-primary);">"${s} no valor de R$ ${m}, poupando R$ ${a} por mês. Farei isso para ${r}, alcançando minha meta em ${t} meses."</p>`;
                 resultDiv.classList.remove('hidden');
             }
 
@@ -533,11 +712,11 @@
                 const finalBalanceEl = document.getElementById('final-balance');
                 if (finalBalanceEl) {
                     finalBalanceEl.textContent = formatter.format(finalBalance);
-                    finalBalanceEl.classList.remove('text-[#C2782C]', 'text-[#1B768E]'); 
+                    finalBalanceEl.classList.remove('text-[#C2782C]', 'text-[var(--color-brand-teal)]'); 
                     if (finalBalance < 0) {
-                        finalBalanceEl.classList.add('text-[#C2782C]');
+                        finalBalanceEl.classList.add('text-[#C2782C]'); // Laranja para negativo
                     } else {
-                        finalBalanceEl.classList.add('text-[#1B768E]');
+                        finalBalanceEl.classList.add('text-[var(--color-brand-teal)]'); // Azul petróleo para positivo
                     }
                 }
                 updateBudgetChartInstance(expenseLabels, expenseValues);
@@ -569,15 +748,12 @@
                 }
             }
 
-            // Configurar event listeners específicos para cada seção, incluindo botões Próximo/Anterior
             function setupEventListenersForSection(sectionId) {
                 const sectionElement = document.getElementById(sectionId);
                 if (!sectionElement) return;
 
-                // Listeners para botões Próximo/Anterior dentro da seção
                 const sectionNavButtons = sectionElement.querySelectorAll('.section-nav-btn');
                 sectionNavButtons.forEach(button => {
-                    // Remove listener antigo para evitar duplicação se a seção for re-renderizada (embora não seja o caso aqui com dataset.rendered)
                     button.removeEventListener('click', handleSectionNavButtonClick); 
                     button.addEventListener('click', handleSectionNavButtonClick);
                 });
@@ -605,17 +781,22 @@
                  lucide.createIcons(); 
             }
 
-            // Atualizar ou criar o gráfico de orçamento
             function updateBudgetChartInstance(labels, data) {
                 const chartCanvas = document.getElementById('budgetChart');
                 if (!chartCanvas) return;
 
-                const chartColors = ['#FB9833', '#1B768E', '#012538', '#4D555B', '#F0A75E', '#5DA9BE', '#8A9AAC'];
+                const chartColors = ['var(--color-brand-orange)', 'var(--color-brand-teal)', 'var(--color-brand-dark-blue)', 'var(--color-brand-dark-gray)', '#F0A75E', '#5DA9BE', '#8A9AAC'];
+                const isDarkMode = htmlElement.classList.contains('dark');
 
                 if (budgetChart) {
                     budgetChart.data.labels = labels;
                     budgetChart.data.datasets[0].data = data;
-                    budgetChart.data.datasets[0].backgroundColor = chartColors.slice(0, data.length);
+                    // As cores dos datasets são fixas da paleta, não precisam mudar com o tema, apenas o fundo do card
+                    budgetChart.options.plugins.legend.labels.color = isDarkMode ? getComputedStyle(htmlElement).getPropertyValue('--color-chart-label-text-dark') : getComputedStyle(htmlElement).getPropertyValue('--color-chart-label-text-light');
+                    budgetChart.options.plugins.title.color = isDarkMode ? getComputedStyle(htmlElement).getPropertyValue('--color-chart-title-text-dark') : getComputedStyle(htmlElement).getPropertyValue('--color-chart-title-text-light');
+                    budgetChart.options.plugins.tooltip.backgroundColor = isDarkMode ? getComputedStyle(htmlElement).getPropertyValue('--color-chart-tooltip-bg-dark') : getComputedStyle(htmlElement).getPropertyValue('--color-chart-tooltip-bg-light');
+                    budgetChart.options.plugins.tooltip.titleColor = isDarkMode ? getComputedStyle(htmlElement).getPropertyValue('--color-chart-tooltip-text-dark') : getComputedStyle(htmlElement).getPropertyValue('--color-chart-tooltip-text-light');
+                    budgetChart.options.plugins.tooltip.bodyColor = isDarkMode ? getComputedStyle(htmlElement).getPropertyValue('--color-chart-tooltip-text-dark') : getComputedStyle(htmlElement).getPropertyValue('--color-chart-tooltip-text-light');
                     budgetChart.update();
                 } else {
                     const ctx = chartCanvas.getContext('2d');
@@ -626,8 +807,8 @@
                             datasets: [{
                                 label: 'Despesas',
                                 data: data,
-                                backgroundColor: chartColors.slice(0, data.length),
-                                borderColor: '#FFFFFF', 
+                                backgroundColor: chartColors.slice(0, data.length).map(color => color.startsWith('var') ? getComputedStyle(htmlElement).getPropertyValue(color.slice(4,-1)) : color),
+                                borderColor: isDarkMode ? getComputedStyle(htmlElement).getPropertyValue('--color-card-bg-dark') : getComputedStyle(htmlElement).getPropertyValue('--color-card-bg-light'), // Borda com a cor do fundo do card
                                 borderWidth: 2,
                             }]
                         },
@@ -637,15 +818,19 @@
                             plugins: {
                                 legend: {
                                     position: 'bottom',
-                                    labels: { color: '#4D555B', font: { family: 'Inter, sans-serif' } }
+                                    labels: { color: isDarkMode ? getComputedStyle(htmlElement).getPropertyValue('--color-chart-label-text-dark') : getComputedStyle(htmlElement).getPropertyValue('--color-chart-label-text-light'), font: { family: 'Inter, sans-serif' } }
                                 },
                                 title: {
                                     display: true,
                                     text: 'Distribuição das Despesas',
-                                    color: '#012538', 
+                                    color: isDarkMode ? getComputedStyle(htmlElement).getPropertyValue('--color-chart-title-text-dark') : getComputedStyle(htmlElement).getPropertyValue('--color-chart-title-text-light'), 
                                     font: { size: 16, family: 'Inter, sans-serif', weight: 'bold' }
                                 },
                                 tooltip: {
+                                    backgroundColor: isDarkMode ? getComputedStyle(htmlElement).getPropertyValue('--color-chart-tooltip-bg-dark') : getComputedStyle(htmlElement).getPropertyValue('--color-chart-tooltip-bg-light'),
+                                    titleColor: isDarkMode ? getComputedStyle(htmlElement).getPropertyValue('--color-chart-tooltip-text-dark') : getComputedStyle(htmlElement).getPropertyValue('--color-chart-tooltip-text-light'),
+                                    bodyColor: isDarkMode ? getComputedStyle(htmlElement).getPropertyValue('--color-chart-tooltip-text-dark') : getComputedStyle(htmlElement).getPropertyValue('--color-chart-tooltip-text-light'),
+                                    titleFont: { family: 'Inter, sans-serif' }, bodyFont: { family: 'Inter, sans-serif' },
                                     callbacks: {
                                         label: function(context) {
                                             let label = context.label || '';
@@ -655,9 +840,7 @@
                                             }
                                             return label;
                                         }
-                                    },
-                                    backgroundColor: '#012538', titleColor: '#FCEFEF', bodyColor: '#FCEFEF',
-                                     titleFont: { family: 'Inter, sans-serif' }, bodyFont: { family: 'Inter, sans-serif' },
+                                    }
                                 }
                             },
                             animation: { animateScale: true, animateRotate: true }
@@ -666,15 +849,15 @@
                 }
             }
             
-            // Combina todos os links de navegação para um único loop de setup
             const allNavLinks = [...headerNavLinks, ...footerNavLinks, ...mobileNavLinks];
             allNavLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const sectionId = link.getAttribute('href').substring(1);
                     showSection(sectionId);
-                    if (mobileMenu.classList.contains('block') || !mobileMenu.classList.contains('hidden')) { // Verifica se o menu mobile está visível
+                    if (mobileMenu.classList.contains('block') || !mobileMenu.classList.contains('hidden')) { 
                          mobileMenu.classList.add('hidden'); 
+                         mobileMenu.classList.remove('block');
                     }
                 });
             });
@@ -682,7 +865,7 @@
             if (mobileMenuButton) {
                 mobileMenuButton.addEventListener('click', () => {
                     mobileMenu.classList.toggle('hidden');
-                    mobileMenu.classList.toggle('block'); // Garante que o display seja block quando não hidden
+                    mobileMenu.classList.toggle('block'); 
                 });
             }
 
@@ -700,7 +883,17 @@
                     initialSectionId = hashId;
                 }
             }
-            showSection(initialSectionId);
+            showSection(initialSectionId); // Mostra a seção inicial (que vai carregar o gráfico se for 'orcamento')
+            
+            // Se a seção inicial for 'orcamento', o gráfico já é populado dentro do showSection -> setupEventListenersForSection -> updateBudgetUI
+            // Para garantir que o gráfico respeite o tema inicial, chamamos applyTheme novamente após a lógica de carregamento inicial.
+            if (savedTheme) {
+                applyTheme(savedTheme === 'dark');
+            } else {
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                applyTheme(prefersDark); 
+            }
+
 
             window.addEventListener('popstate', () => {
                 let currentHashId = 'mentalidade';
