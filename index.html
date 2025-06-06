@@ -29,6 +29,14 @@
             background-color: rgba(27, 118, 142, 0.1); /* brand-teal com 10% de opacidade */
             color: #1B768E; /* brand-teal */
         }
+        .footer-nav-link {
+            color: #FCEFEF; /* Cor clara para texto no rodapé escuro */
+            transition: color 0.3s ease;
+        }
+        .footer-nav-link:hover {
+            color: #FB9833; /* Cor laranja ao pairar */
+        }
+
         .section-card {
             background-color: white;
             border-radius: 0.75rem; /* rounded-xl */
@@ -72,23 +80,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Custom Tailwind colors (opcional, pode usar arbitrário) */
-        /*
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'brand-orange': '#FB9833',
-                        'brand-light-bg': '#FCEFEF',
-                        'brand-teal': '#1B768E',
-                        'brand-dark-blue': '#012538',
-                        'brand-dark-gray': '#4D555B',
-                    }
-                }
-            }
-        }
-        */
-
         /* Estilos para inputs e botões com as cores da paleta */
         input[type="text"], input[type="number"], select {
             border-color: #D1D5DB; /* gray-300 */
@@ -107,6 +98,14 @@
         .btn-primary:hover {
             background-color: #E5852D; /* Laranja mais escuro */
         }
+        .btn-secondary {
+            background-color: #1B768E; /* brand-teal */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #145A6C; /* Teal mais escuro */
+        }
 
     </style>
 </head>
@@ -119,7 +118,7 @@
                     <i data-lucide="book-heart" class="h-8 w-8 text-[#FB9833]"></i> <!-- brand-orange -->
                     <h1 class="ml-3 text-xl font-bold text-[#012538] hidden sm:block">Educação Financeira</h1> <!-- brand-dark-blue -->
                 </div>
-                <nav class="hidden md:flex space-x-1">
+                <nav id="header-nav" class="hidden md:flex space-x-1">
                     <a href="#mentalidade" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-[#4D555B]">Mentalidade</a>
                     <a href="#orcamento" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-[#4D555B]">Orçamento</a>
                     <a href="#dividas" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-[#4D555B]">Dívidas</a>
@@ -146,7 +145,7 @@
         </div>
     </header>
 
-    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-[calc(100vh-200px)]"> <!-- min-h para empurrar rodapé -->
         <section id="hero" class="text-center py-12">
             <h2 class="text-4xl font-bold tracking-tight text-[#FB9833] sm:text-5xl">Do Zero à Liberdade Financeira</h2> <!-- brand-orange -->
             <p class="mt-4 max-w-2xl mx-auto text-lg text-[#4D555B]">Transforme sua relação com o dinheiro. Este guia interativo capacita você a organizar suas finanças, eliminar o estresse e construir o futuro que você sonha.</p>
@@ -164,10 +163,20 @@
         </div>
     </main>
     
-    <footer class="bg-[#012538] text-[#FCEFEF] mt-16"> <!-- brand-dark-blue bg, brand-light-bg text -->
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
-            <p>&copy; 2025 Matheus Torrente - Economista e Educador Financeiro.</p>
-            <p class="text-sm text-[#FCEFEF]/80 mt-2">Esta é uma aplicação interativa baseada nos conceitos do livro "Educação Financeira: Do zero à liberdade".</p>
+    <footer class="bg-[#012538] text-[#FCEFEF] mt-16 py-12"> <!-- brand-dark-blue bg, brand-light-bg text -->
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <nav id="footer-nav" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mb-8 text-center sm:text-left">
+                <a href="#mentalidade" class="footer-nav-link text-sm font-medium">Mentalidade</a>
+                <a href="#orcamento" class="footer-nav-link text-sm font-medium">Orçamento</a>
+                <a href="#dividas" class="footer-nav-link text-sm font-medium">Dívidas</a>
+                <a href="#seguranca" class="footer-nav-link text-sm font-medium">Segurança</a>
+                <a href="#bancos" class="footer-nav-link text-sm font-medium">Bancos</a>
+                <a href="#autor" class="footer-nav-link text-sm font-medium">Sobre o Autor</a>
+            </nav>
+            <div class="border-t border-[#FCEFEF]/20 pt-8 text-center">
+                <p>&copy; 2025 Matheus Torrente - Economista e Educador Financeiro.</p>
+                <p class="text-sm text-[#FCEFEF]/80 mt-2">Esta é uma aplicação interativa baseada nos conceitos do livro "Educação Financeira: Do zero à liberdade".</p>
+            </div>
         </div>
     </footer>
 
@@ -177,6 +186,9 @@
             
             const contentContainer = document.getElementById('content-container');
             let budgetChart; // Variável para o gráfico de orçamento
+
+            // Ordem das seções para navegação Próximo/Anterior
+            const sectionOrder = ['mentalidade', 'orcamento', 'dividas', 'seguranca', 'bancos', 'autor'];
 
             // Dados do Aplicativo: Conteúdo de cada seção
             const appData = {
@@ -357,7 +369,6 @@
                         <div class="section-card">
                             <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
                                 <div class="md:w-1/3 flex-shrink-0">
-                                    <!-- Substitua '215__MG_9213.jpg' pelo caminho correto da imagem se estiver hospedada -->
                                     <img src="215__MG_9213.jpg" alt="Foto de Matheus Torrente" class="rounded-lg shadow-lg w-full max-w-xs mx-auto md:mx-0 aspect-[3/4] object-cover" onerror="this.onerror=null;this.src='https://placehold.co/300x400/FCEFEF/012538?text=Matheus+Torrente';">
                                 </div>
                                 <div class="md:w-2/3">
@@ -371,16 +382,6 @@
                                     <p class="text-[#4D555B] text-justify">
                                         Sua abordagem didática e empática torna os conceitos financeiros compreensíveis para todos, independentemente do nível de conhecimento prévio.
                                     </p>
-                                    <!-- Exemplo de links sociais (descomente e ajuste)
-                                    <div class="mt-6">
-                                        <h4 class="text-lg font-semibold text-[#012538] mb-2">Siga Matheus:</h4>
-                                        <div class="flex space-x-4">
-                                            <a href="#" target="_blank" class="text-[#1B768E] hover:text-[#FB9833]"><i data-lucide="linkedin" class="h-6 w-6"></i></a>
-                                            <a href="#" target="_blank" class="text-[#1B768E] hover:text-[#FB9833]"><i data-lucide="instagram" class="h-6 w-6"></i></a>
-                                            <a href="#" target="_blank" class="text-[#1B768E] hover:text-[#FB9833]"><i data-lucide="globe" class="h-6 w-6"></i></a>
-                                        </div>
-                                    </div>
-                                    -->
                                 </div>
                             </div>
                         </div>
@@ -388,24 +389,51 @@
                 }
             };
             
-            const navLinks = document.querySelectorAll('nav .nav-link'); // Desktop nav
-            const mobileNavLinks = document.querySelectorAll('#mobile-menu .nav-link-mobile'); // Mobile nav
+            const headerNavLinks = document.querySelectorAll('#header-nav .nav-link');
+            const footerNavLinks = document.querySelectorAll('#footer-nav .footer-nav-link');
+            const mobileNavLinks = document.querySelectorAll('#mobile-menu .nav-link-mobile'); 
             const allContentSections = document.querySelectorAll('.content-section');
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const heroStartButton = document.getElementById('hero-start-button');
+
+            // Função para gerar os botões de navegação Próximo/Anterior
+            function getSectionNavigationButtons(currentSectionId) {
+                const currentIndex = sectionOrder.indexOf(currentSectionId);
+                let buttonsHTML = '<div class="mt-12 flex justify-between items-center border-t pt-6">';
+                
+                if (currentIndex > 0) {
+                    const prevSectionId = sectionOrder[currentIndex - 1];
+                    buttonsHTML += `<button data-navtarget="${prevSectionId}" class="section-nav-btn btn-secondary text-sm py-2 px-4 rounded-lg flex items-center"><i data-lucide="arrow-left" class="h-4 w-4 mr-2"></i> Anterior</button>`;
+                } else {
+                    buttonsHTML += '<div></div>'; // Placeholder para manter o justify-between
+                }
+
+                if (currentIndex < sectionOrder.length - 1) {
+                    const nextSectionId = sectionOrder[currentIndex + 1];
+                    buttonsHTML += `<button data-navtarget="${nextSectionId}" class="section-nav-btn btn-primary text-sm py-2 px-4 rounded-lg flex items-center">Próxima <i data-lucide="arrow-right" class="h-4 w-4 ml-2"></i></button>`;
+                } else {
+                     buttonsHTML += '<div></div>'; // Placeholder
+                }
+                buttonsHTML += '</div>';
+                return buttonsHTML;
+            }
+
 
             // Função para renderizar o conteúdo de uma seção
             function renderContent(sectionId) {
                 const sectionElement = document.getElementById(sectionId);
                 const data = appData[sectionId];
                 if (sectionElement && data) {
-                    sectionElement.innerHTML = `
+                    let fullContent = `
                         <h2 class="text-3xl font-bold text-[#012538] mb-2">${data.title}</h2>
                         <p class="text-lg text-[#4D555B] mb-8">${data.subtitle}</p>
                         ${data.content}
                     `;
-                    lucide.createIcons(); // Recriar ícones Lucide após inserir HTML
+                    // Adicionar botões de navegação Próximo/Anterior
+                    fullContent += getSectionNavigationButtons(sectionId);
+                    sectionElement.innerHTML = fullContent;
+                    lucide.createIcons(); 
                 } else {
                     console.warn(`Seção ou dados não encontrados para: ${sectionId}`);
                 }
@@ -419,7 +447,7 @@
                         sectionExists = true;
                         if (!section.dataset.rendered) {
                             renderContent(sectionIdToShow);
-                            setupEventListenersForSection(sectionIdToShow);
+                            setupEventListenersForSection(sectionIdToShow); // Configura listeners para a seção recém-renderizada
                             section.dataset.rendered = 'true';
                         }
                         section.style.display = 'block';
@@ -432,39 +460,36 @@
 
                 if (!sectionExists) {
                     console.warn(`Tentando mostrar seção inexistente: ${sectionIdToShow}`);
-                    if (appData['mentalidade']) showSection('mentalidade'); // Fallback para mentalidade
+                    if (appData['mentalidade']) showSection('mentalidade'); 
                     return;
                 }
 
-                // Atualizar link ativo na navegação desktop
-                navLinks.forEach(link => {
-                    if (link.getAttribute('href') === `#${sectionIdToShow}`) {
-                        link.classList.add('active-nav');
-                    } else {
-                        link.classList.remove('active-nav');
-                    }
+                // Atualizar link ativo na navegação do cabeçalho
+                headerNavLinks.forEach(link => {
+                    link.classList.toggle('active-nav', link.getAttribute('href') === `#${sectionIdToShow}`);
+                });
+                 // Atualizar link ativo na navegação do rodapé (sem a classe 'active-nav' visual, apenas para referência se necessário no futuro)
+                footerNavLinks.forEach(link => {
+                     // Adicionar lógica de destaque se desejado para o rodapé
                 });
                 // Atualizar link ativo na navegação mobile
                 mobileNavLinks.forEach(link => {
-                    if (link.getAttribute('href') === `#${sectionIdToShow}`) {
-                        link.classList.add('active-nav', 'bg-[#1B768E]/20'); // Estilo ativo específico para mobile
-                    } else {
-                        link.classList.remove('active-nav', 'bg-[#1B768E]/20');
-                    }
+                    link.classList.toggle('active-nav', link.getAttribute('href') === `#${sectionIdToShow}`);
+                    link.classList.toggle('bg-[#1B768E]/20', link.getAttribute('href') === `#${sectionIdToShow}`);
                 });
                 
-                // Atualizar hash da URL sem causar pulo de página imediato, se a seção existe
                 if (window.location.hash !== `#${sectionIdToShow}`) {
                      history.pushState(null, null, `#${sectionIdToShow}`);
                 }
-                // Rolar para o topo do container do conteúdo para simular mudança de página
                 const headerHeight = document.querySelector('header').offsetHeight;
-                const sectionTop = document.getElementById(sectionIdToShow).offsetTop;
-                 window.scrollTo({
-                    top: sectionTop - headerHeight - 20, // Ajuste de 20px para espaçamento
-                    behavior: 'smooth'
-                });
-
+                const sectionElement = document.getElementById(sectionIdToShow);
+                if (sectionElement) { 
+                    const sectionTop = sectionElement.offsetTop;
+                    window.scrollTo({
+                        top: sectionTop - headerHeight - 20, 
+                        behavior: 'smooth'
+                    });
+                }
             }
 
             // Manipuladores de eventos (para evitar duplicação)
@@ -482,7 +507,7 @@
 
             function updateBudgetUI() {
                 const incomeInput = document.getElementById('budget-income');
-                if (!incomeInput) return; // Sai se o formulário de orçamento não estiver carregado
+                if (!incomeInput) return; 
 
                 const income = parseFloat(incomeInput.value) || 0;
                 const expenseInputs = document.querySelectorAll('.budget-expense');
@@ -495,7 +520,6 @@
                     const value = parseFloat(input.value) || 0;
                     totalExpenses += value;
                     expenseValues.push(value);
-                    // Pega o label do data-label ou do elemento anterior
                     const labelText = input.dataset.label || (input.previousElementSibling ? input.previousElementSibling.textContent : 'Desconhecido');
                     expenseLabels.push(labelText);
                 });
@@ -509,7 +533,7 @@
                 const finalBalanceEl = document.getElementById('final-balance');
                 if (finalBalanceEl) {
                     finalBalanceEl.textContent = formatter.format(finalBalance);
-                    finalBalanceEl.classList.remove('text-[#C2782C]', 'text-[#1B768E]'); // Laranja para negativo, Teal para positivo
+                    finalBalanceEl.classList.remove('text-[#C2782C]', 'text-[#1B768E]'); 
                     if (finalBalance < 0) {
                         finalBalanceEl.classList.add('text-[#C2782C]');
                     } else {
@@ -538,8 +562,26 @@
                 if(reserveResultsEl) reserveResultsEl.classList.remove('hidden');
             }
 
-            // Configurar event listeners específicos para cada seção
+            function handleSectionNavButtonClick(event) {
+                const targetSectionId = event.currentTarget.dataset.navtarget;
+                if (targetSectionId) {
+                    showSection(targetSectionId);
+                }
+            }
+
+            // Configurar event listeners específicos para cada seção, incluindo botões Próximo/Anterior
             function setupEventListenersForSection(sectionId) {
+                const sectionElement = document.getElementById(sectionId);
+                if (!sectionElement) return;
+
+                // Listeners para botões Próximo/Anterior dentro da seção
+                const sectionNavButtons = sectionElement.querySelectorAll('.section-nav-btn');
+                sectionNavButtons.forEach(button => {
+                    // Remove listener antigo para evitar duplicação se a seção for re-renderizada (embora não seja o caso aqui com dataset.rendered)
+                    button.removeEventListener('click', handleSectionNavButtonClick); 
+                    button.addEventListener('click', handleSectionNavButtonClick);
+                });
+
                 if (sectionId === 'mentalidade') {
                     const smartGoalForm = document.getElementById('smart-goal-form');
                     if (smartGoalForm && !smartGoalForm.dataset.listenerAttached) {
@@ -551,7 +593,7 @@
                     if (budgetForm && !budgetForm.dataset.listenerAttached) {
                         budgetForm.addEventListener('input', updateBudgetUI);
                         budgetForm.dataset.listenerAttached = 'true';
-                        updateBudgetUI(); // Chamada inicial para preencher o gráfico com valores padrão
+                        updateBudgetUI(); 
                     }
                 } else if (sectionId === 'seguranca') {
                     const calculateReserveBtn = document.getElementById('calculate-reserve-btn');
@@ -560,7 +602,7 @@
                         calculateReserveBtn.dataset.listenerAttached = 'true';
                     }
                 }
-                 lucide.createIcons(); // Garante que ícones em conteúdo dinâmico sejam renderizados
+                 lucide.createIcons(); 
             }
 
             // Atualizar ou criar o gráfico de orçamento
@@ -568,7 +610,7 @@
                 const chartCanvas = document.getElementById('budgetChart');
                 if (!chartCanvas) return;
 
-                const chartColors = ['#FB9833', '#1B768E', '#012538', '#4D555B', '#F0A75E', '#5DA9BE', '#8A9AAC']; // Cores da paleta + variações
+                const chartColors = ['#FB9833', '#1B768E', '#012538', '#4D555B', '#F0A75E', '#5DA9BE', '#8A9AAC'];
 
                 if (budgetChart) {
                     budgetChart.data.labels = labels;
@@ -585,7 +627,7 @@
                                 label: 'Despesas',
                                 data: data,
                                 backgroundColor: chartColors.slice(0, data.length),
-                                borderColor: '#FFFFFF', // Cor da borda dos segmentos
+                                borderColor: '#FFFFFF', 
                                 borderWidth: 2,
                             }]
                         },
@@ -595,79 +637,55 @@
                             plugins: {
                                 legend: {
                                     position: 'bottom',
-                                    labels: {
-                                        color: '#4D555B', // Cor do texto da legenda
-                                        font: {
-                                            family: 'Inter, sans-serif'
-                                        }
-                                    }
+                                    labels: { color: '#4D555B', font: { family: 'Inter, sans-serif' } }
                                 },
                                 title: {
                                     display: true,
                                     text: 'Distribuição das Despesas',
-                                    color: '#012538', // Cor do título do gráfico
-                                    font: {
-                                        size: 16,
-                                        family: 'Inter, sans-serif',
-                                        weight: 'bold'
-                                    }
+                                    color: '#012538', 
+                                    font: { size: 16, family: 'Inter, sans-serif', weight: 'bold' }
                                 },
                                 tooltip: {
                                     callbacks: {
                                         label: function(context) {
                                             let label = context.label || '';
-                                            if (label) {
-                                                label += ': ';
-                                            }
+                                            if (label) { label += ': '; }
                                             if (context.parsed !== null) {
                                                 label += new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(context.parsed);
                                             }
                                             return label;
                                         }
                                     },
-                                    backgroundColor: '#012538',
-                                    titleColor: '#FCEFEF',
-                                    bodyColor: '#FCEFEF',
-                                     titleFont: { family: 'Inter, sans-serif' },
-                                     bodyFont: { family: 'Inter, sans-serif' },
+                                    backgroundColor: '#012538', titleColor: '#FCEFEF', bodyColor: '#FCEFEF',
+                                     titleFont: { family: 'Inter, sans-serif' }, bodyFont: { family: 'Inter, sans-serif' },
                                 }
                             },
-                            animation: {
-                                animateScale: true,
-                                animateRotate: true
-                            }
+                            animation: { animateScale: true, animateRotate: true }
                         }
                     });
                 }
             }
             
-            // Event listeners para os links de navegação (Desktop)
-            navLinks.forEach(link => {
+            // Combina todos os links de navegação para um único loop de setup
+            const allNavLinks = [...headerNavLinks, ...footerNavLinks, ...mobileNavLinks];
+            allNavLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const sectionId = link.getAttribute('href').substring(1);
                     showSection(sectionId);
-                });
-            });
-
-            // Event listeners para os links de navegação (Mobile)
-            mobileNavLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const sectionId = link.getAttribute('href').substring(1);
-                    showSection(sectionId);
-                    mobileMenu.classList.add('hidden'); // Esconder menu mobile após clique
+                    if (mobileMenu.classList.contains('block') || !mobileMenu.classList.contains('hidden')) { // Verifica se o menu mobile está visível
+                         mobileMenu.classList.add('hidden'); 
+                    }
                 });
             });
             
-            // Event listener para o botão do menu mobile
             if (mobileMenuButton) {
                 mobileMenuButton.addEventListener('click', () => {
                     mobileMenu.classList.toggle('hidden');
+                    mobileMenu.classList.toggle('block'); // Garante que o display seja block quando não hidden
                 });
             }
 
-            // Event listener para o botão "Comece sua Jornada Agora" no hero
             if (heroStartButton) {
                 heroStartButton.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -675,18 +693,15 @@
                 });
             }
 
-            // Carregamento inicial da seção (baseado no hash ou padrão)
-            let initialSectionId = 'mentalidade'; // Padrão
+            let initialSectionId = 'mentalidade'; 
             if (window.location.hash) {
                 const hashId = window.location.hash.substring(1);
-                // Verifica se o hash corresponde a uma seção válida
                 if (appData[hashId]) {
                     initialSectionId = hashId;
                 }
             }
             showSection(initialSectionId);
 
-            // Lidar com o botão voltar/avançar do navegador
             window.addEventListener('popstate', () => {
                 let currentHashId = 'mentalidade';
                  if (window.location.hash) {
@@ -697,7 +712,6 @@
                 }
                 showSection(currentHashId);
             });
-
         });
     </script>
 </body>
